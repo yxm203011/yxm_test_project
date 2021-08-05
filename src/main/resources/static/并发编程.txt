@@ -1,0 +1,174 @@
+并发编程
+
+JDK中的线程是协作式
+进程：是系统进行资源调度和分配的基本单位
+线程：是CPU调度的最小单位，必须依赖于进程存在
+并行：是多个处理器处理多个任务
+并发：一个处理器处理多个任务
+
+
+
+
+Thread和Runnable区别
+
+Thread：是对线程的抽象
+Runnable：是任务和对业务逻辑的抽象
+
+
+
+interrupt和interrupted和isinterrupted
+
+interrupt：发起中断设置线程标识位，就相当于是通知线程该结束了
+interrupted：判断当前的interrupt，并在最后将interrupt设置为true
+isinterrupted：判断是否接收到了结束的通知，也就相当于是判断是否调用了interrupt
+
+
+
+Thread.currentThread()在Runnable或Thread中获取当前执行的线程
+在Runnable中没有interrupt这个方法，可以使用Thread.currentTrhead().interrupted来获取当前线程标识为状态
+
+在线程中，如果使用了sleep、wait等阻塞方法时  需要使用try catch 捕获一下当前标识位异常 然后再catch中再调用interrupt
+
+
+
+线程中Start和run方法的区别
+
+如果在main方法中调用一个实例的start方法则是启动一个新的线程
+如果在main方法中调用一个实例的run方法则是在主线程上运行并不是一个新的线程
+
+
+线程中yield方法是让当前线程让出CPU时间片但是不释放内存并且使当前这个线程进入就绪状态
+join方法是让并行的线程改为串行 比如说A、B两个线程 如果不使用join则是并行的两个线程同时执行 一旦A调用了B的join方法  则A线程必须等待B线程方法执行完才执行
+线程中使用setDaemon(true)来将线程设置为守护线程，守护线程会在主线程执行完成之后自动结束，在守护线程中try catch finally 中的finally不一定执行
+
+使用synchionized方法时要确保锁住的对象不会发生改变并且多个线程锁的得是同一个对象
+volatile关键字定义变量在修改时可以被线程发现，但是必须确保每个线程都要读取这个变量
+用法：
+private volatile static int number;
+
+ThreadLocal用来确保每个线程变量的副本  每个线程自己管理自己的 实现了每个线程的隔离
+用法: 
+private static ThreadLocal<Integer> threadlo = new ThreadLocal<Integer>(){
+        @Override
+        protected Integer initialValue() {
+            return 1;
+        }
+    };
+
+
+强引用、软引用、弱引用、虚引用
+强引用：一般new出来的都是强引用，也就是说栈内存只要指向堆实例就不会被GC回收称之为强引用
+软引用：SoftRefence表示弱引用，如果内存即将溢出，先进行一次垃圾回收，然后如果还是不够的话，就会把SoftRefence回收，不管栈内存中是否有指向堆内存，如果进行了一次GC内存够了就可能不会回收。
+弱引用：WeakRefence表示弱引用，是只要进行GC就一定会被回收
+虚引用：就是在垃圾回收的时候，收到一个通知
+
+wait（等待）、notify/notifyAll（通知）都是对象中的方法，并不是线程Thread中的方法，对象在调用wait方法时会释放当前这个对象的锁，但是notify/notifyAll不会释放当前对象的锁他只会在当前的synchronized方法执行完之后释放，尽量使用notifyAll因为notify只会随机唤醒一个
+使用规则：
+wait:
+synchronized(对象){
+    while(不满足条件时){
+        对象.wait();
+    }
+    满足条件时的逻辑操作
+}
+notify/notifyAll
+synchronized(对象){
+    业务逻辑改变条件
+    对象.notify();/对象.notifyAll();
+}
+
+yield()、sleep()、wait()、notify()对线程的影响
+yield:只是让出CPU的执行权，并不会对锁进行释放
+sleep:也不会释放当前线程持有的锁
+wait:会释放当前持有的锁，当被唤醒时就会去竞争锁
+notify:执行完成之后也不会释放锁，一般notify放在同步代码块最后
+
+
+算法思想
+分而治之：是将一个大问题分割成相同的小问题，并且每个小问题中间没有关联
+动态规划：是将一个大问题分割成相同的小问题，并且每个小问题之间又关联
+
+十大计算机经典算法:快速排序（分而治之算法思想）、堆排序、归并排序（分而治之算法思想）、二分查找（分而治之算法思想）、线性查找、深度优先、广度优先、Dijkstra、动态规划、朴素贝叶斯分类
+
+fork-join:判断一个任务是否足够小，如果是则计算，如果不是则拆分成几个小的进行计算
+有返回值使用Task，没有返回值使用Action，同步方法使用invoke异步方法使用submit/execture
+
+CountDownLatch和CycliBarrier
+CountDownLatch是由当前线程外的线程减去CountDownLatch里的初始值，而CycliBarrier是有当前线程本身调用的并且CycliBarrier可以重复使用，CountDownLatch不可以重复使用，Cyclibarrier还可以对多个线程的结果做汇总
+
+CountDownLatch：线程计数器，可以设置初始化默认值使用await()来等待并且判断默认值是否为0 如果为0 则执行如果不为0 则继续等待 可以使用CountDownLatch.countDown()来减
+用法：CountDownLatch latch = new CountDownLatch(整型的初始化值);
+
+CyclicBarrier：一个可以循环利用的屏障用法，如果param1是4启动完4个线程如果每个线程都执行了自己的await方法则4个线程才会执行下面的方法，如果有一个方法没执行到则会处于等待的状态，每次4个线程都执行过await方法后都会执行param2的线程方法，如果多次调用await方法 则param2就会调用多次：
+ CyclicBarrier barrier = new CyclicBarrier(param1,param2);
+ param1：是线程的数量
+ param2：是个线程，可有可无，如果需要对线程结果统计的话则所有的线程都调用完await时就会执行param2这个线程
+
+Semaphore：做流量控制,使用方法private final Semaphore userful, useless;
+使用Semaphore.acquire来获取许可证，使用Semaphore.release归还许可证使用，Semaphore.getQueueLength来获取当前处于等待中的数量，Semaphore.availablePermits来获取剩余多少许可证可以使用
+
+Exchanger：数据交换，只支持两个线程相互交换数据
+使用private static final Exchanger<Set<String>> exchanger = new Exchanger<>();
+exchanger.exchange()交换两个线程中的数据
+
+
+Callable、Future、FutrueTask之间的关系
+futureTask：它实现了了RunnableFuture接口，而RunnableFuture接口又继承自Runnable和Future接口，所以FutureTask既可以作为Runnable被线程执行，又可以作为Future得到Callable的返回值。
+future：Future就是对具体的Runnable或者Callable任务的执行结果进行取消，查询是否完成，获取结果
+Callable：如果实现了callable则线程中就需要实现call这个方法而不是runnable中的run方法
+
+
+原子操作CAS
+CAS内部处理机制是：利用了现代处理器的CAS指令（内存地址，oldValue，newValue）
+乐观锁：假设数据不会冲突，再数据进行更新时，才会正式对数据的冲突进行检测，如果冲突则返回异常信息，让用户觉得如何去做。
+悲观锁：在对数据库进行操作的时候，为了避免同时被其他人修改，最好的办法就是直接进行加锁，防止并发
+
+CAS（Compare And Swap）：原子操作，就相当于数据库中的事务，要不都执行要不都不执行
+CAS中的ABA问题，线程1准备利用CAS修改变量值A，但是在修改之前，其他线程已经将A变成了B，然后又变成A，即A->B->A,线程1执行CAS的时候发现仍然为A，所以CAS会操作成功，但是其实目前这个A已经是其他线程修改的了，但是线程1并不知道，最终内存值变成了B，这就导致了ABA问题  通俗的来说 就是小明倒了一杯水，但是没有喝，之后出去办别的事情了，但是他的弟弟过来看到有杯水就给喝了，但是喝了半杯觉得不行，就又倒满了放到了哪里，等小明办完事回来之后 就继续喝了   解决办法：增加版本每次修改值的时候都增加一个版本号，就相当于是装一个摄像头，如果看到弟弟喝了这杯水，那我就不喝了。
+JDK中相关原子操作类型的使用
+更新基本类型：AtomicBoolean、AtomicInteger、AtomicLong
+更新数组类型：AtomicIntegerArray,AtomicLongArray,AtomicReferenceArray
+更新引用类型：AtommicReference,AtomicMarkableReference(表示有没有修改过),AtomicStampedReference(修改了几次)
+源自更新字段类：AtomicReferenceFieldUpdater,AtomicIntegerFieldUpdater,AtomicLongFieldUpdater
+
+
+显示锁和AQS(AbstractQuenedSynchronizer)
+创建显示锁：private Lock lock = new ReentrantLock();
+显示锁：表示用户可以自己通过手动上锁，取锁Lock中提供了 lock()//加锁取锁,lockInterruptibly(),tryLock()//尝试取锁,unlock()//解锁  方法用来操作锁
+
+可重用锁ReentrantLock、锁的公平和非公平
+可重用锁概念：当锁到一个方法的时候被锁的方法中再调用当前上锁的这个方法
+公平锁概念：先抢锁的线程先拿到锁说明是公平的反之则是不公平的，非公平的性能比公平锁的性能好
+
+读锁和写锁：
+如果当前锁是读错持有那么所有的读线程都可以访问写线程不可以访问，如果当前的锁实在写锁那么所有的读线程和写线程都需要等待这个锁释放
+ private final ReadWriteLock lock = new ReentrantReadWriteLock();
+ private final Lock getLock = lock.readLock();//读锁
+ private final Lock setLock = lock.writeLock();//写锁
+
+如果实现了Lock接口需要实现等待和通知则需要使用Condition
+用法Condition cond = lock.newCondition();
+使用cond.await()等待
+使用cond.signal()通知
+
+
+位运算
+位于&（1&1=1 0&0=0 1&0=0）
+位或|（1|1=1 0|0=0 1|0=1）
+位非~（~1=0 ~0=1）
+位异或^（1^1=0 1^0=1 0^0=0）
+有符号右移>>（若正数，高位补0，负数补1）
+有符号左移<<
+无符号右移>>>（不论正负，高位均补0）
+取模性质：取模a%（2^n）等价于a&（2^n-1），所以在map里的数组个数一定是2的乘方数，计算key值在那个元素中的时候，就用位运算来快速定位。
+
+Map
+ConcurrentHashMap：线程安全的map，这个map里还提供了putIfAbsent方法这个方法是如果key对应的值有的话就不put如果没有的话就put进去
+
+HashMap和HashTable区别：HashMap是线程不安全的，HashTable是线程安全的由于线程安全的问题HashTable的效率是比不上HashMap的，HashMap中key可以为null而HashTable不能为null否则就会报空指针异常
+Java中的另一个线程安全的与HashMap极其类似的类是什么？同样是线程安全它与HashTable在线程同步上有什么不同？：ConCurrentHashMap.  HashTable是线程安全是采用的方法上加synchronized实现的是对整个map进行加锁，所以如果多线程去get或者put的时候只可以有一个线程可以拿到锁所以效率比较低，而ConcurrentHashMap是使用CAS+synchronized结合分段锁提高了多线程的效率
+HashMap和ConcurrentHashMap的区别：除了加锁并没有什么区别，只不过是HashMap允许键值对为null而ConcurrentHashMap不允许为null，HashMap的节点类继承的是linkedHashMap而ConcurrentHashMap内部单独定义的为node继承的Entry
+ConcurrentHashMap在JDK1.8中，为什么要使用内置锁synchronized来代替重入锁ReentrantLock：因为JDK1.8中开发人员对sync进行了大量的优化
+
+
+ThreadPoolExecutor创建线程池 
