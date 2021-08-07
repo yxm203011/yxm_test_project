@@ -1,2 +1,45 @@
 1.Lambda表达式
 Lambda是一个匿名函数，我们可以把LambDa表达式理解为是一段可以传递的代码（将代码像数据一样进行传递）。可以写出更简洁的代码，更灵活的代码，作为一种更紧凑的代码风格，使JAVA语言得到提升
+ 一、Lambda表达式的基础用法：java8中引入了一个新的操作符"->"该操作符称为箭头操作符或者Lambda操作符
+ * 箭头操作符将Lambda表达式拆分为两部分：
+ * <p>
+ * 左侧：Lambda表达式的参数列表
+ * 右侧：Lanbda表达式中所需执行的功能，即Lambda体
+ * <p>
+ * 语法格式一：无参数，无返回值
+ * () ->
+ * <p>
+ * 语法格式二：有一个参数，无返回值
+ * (x) -> System.out.println(x);
+ * <p>
+ * 语法格式三：如果只有一个参数，箭头操作符前可以不加小括号
+ * x -> System.out.println(x);
+ * <p>
+ * 语法格式四：有两个以上的参数，并且Lambda体中有多个返回值
+ * Comparator<Integer> com = (x, y) -> {
+ * System.out.println("函数式接口");
+ * return Integer.compare(x, y);
+ * };
+ * 语法格式五：若Lambda体中只有一条语句，return和大括号都可以不写
+ * Comparator<Integer> com = (x, y) -> Integer.compare(x, y);
+ * <p>
+ * 语法格式六：Lambda表达式的参数列表中的数据类型可以不写，因为JVM编译器可以从上下文推断出参数类型，即“类型推断”
+ * <p>
+ * <p>
+ * Lambda表达式需要“函数式接口支持”
+ * 函数时接口：接口中只有一个抽象方法的接口，成为函数式接口，可以使用注解@FunctionalInterface修饰
+ * 可以检查是否是函数式接口
+ * <p>
+ * JAVA8中内置的四大贺新函数式接口
+ * Consumer<T>:消费性接口：
+ * void accept(T t);
+ * <p>
+ * Supplier<T>:供给形接口：
+ * T get();
+ * <p>
+ * Function<T,R>: 函数型接口:
+ * R apply(T t);
+ * <p>
+ * Predicate<T>:断言型接口：
+ * boolean test(T t);
+ 
