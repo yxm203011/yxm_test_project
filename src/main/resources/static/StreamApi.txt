@@ -1,0 +1,30 @@
+ 一、Stream的三个操作步骤
+
+  1.创建Stream
+  2.中间操作
+       筛选与切片
+       filter  接收Lambda，从流中排除某些元素，
+       limit   截断流，使其元素不超过给定数量
+       skip(n) 跳过元素给一个扔掉了前N个元素的流，若流中元素不足n个，则返回一个空流，与limit(n)互补
+       distinct 筛选，通过流所生成元素的hashCode和equals去除重复元素
+
+       映射
+       map接收lambda，将元素转换成其他形式或者提取信息，接受一个函数作为参数，该函数会被应用到每个元素上，并将其映射成一个新元素
+       flatMap  接收一个函数作为参数，将流中的每个值都换成另一个流，然后把所有的流连接形成一个流
+
+       排序
+       sorted()  自然排序（按照Compaarable排序为自然排序）
+       sorted(Comparator com) 定制排序
+  3。终止操作（终端操作）
+       查找与匹配
+       allMatch   检查是否匹配所有元素
+       anyMath    检查是否至少匹配一个元素
+       noneMath   检查是否没有匹配元素
+       findFirst  返回第一个元素
+       findAny     返回当前流中的任意元素
+
+       规约
+       reduce(T identity,BinaryOperator)/reduce(BinaryOperator) 可以将流中的元素反复结合起来，得到一个值
+
+       收集
+       collect  将流转换为其他形式，接受一个Collector接口的实现，用于给Stream中元素做汇总给方法

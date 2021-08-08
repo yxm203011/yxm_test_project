@@ -53,6 +53,24 @@ import java.util.function.Supplier;
  * <p>
  * Predicate<T>:断言型接口：
  * boolean test(T t);
+ *
+ * 一、方法引用：若Lambda体中的内容有方法已经实现了，我们可以使用“方法引用”
+ *          可以理解为方法引用是Lambda表达式的另一种表现形式
+ *
+ *主要有三种语法格式
+ * 对象::实例方法对象
+ *
+ * 类::静态方法名
+ *
+ * 类::实例方法名
+ *
+ * 注意：
+ *
+ * 1.Lambda体中调用的方法的参数列表与返回值类型，要与函数时接口中抽象方法的函数列表和返回值类型保持一致
+ * 2.若Lambda参数列表中的第一个参数是实例方法的调用者，而第二个参数是实例方法的参数时，可以使用ClassName:method
+ *
+ * 二、数组引用：
+ * Type[]::new;
  */
 public class TestLambda {
 
