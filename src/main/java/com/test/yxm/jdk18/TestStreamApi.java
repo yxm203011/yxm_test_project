@@ -162,9 +162,9 @@ public class TestStreamApi {
         List<Integer> collect1 = intList.stream().map((i) -> i + 3).collect(Collectors.toList());
         System.out.println(collect1);
     }
-    
+
     @Test
-    public void test17(){
+    public void test17() {
         List<Person> collect = personList.stream().map(p -> {
             p.setSalary(p.getSalary() + 1000);
             return p;
@@ -173,7 +173,7 @@ public class TestStreamApi {
     }
 
     @Test
-    public void test18(){
+    public void test18() {
         List<String> list = Arrays.asList("m,k,l,a", "1,3,5,7");
         List<String> collect = list.stream().flatMap(s -> {
             String[] split = s.split(",");
@@ -183,10 +183,62 @@ public class TestStreamApi {
     }
 
     @Test
-    public void test19(){
+    public void test19() {
         List<Integer> list = Arrays.asList(1, 3, 2, 8, 11, 4);
         Integer integer = list.stream().reduce((x, y) -> x + y).get();
         System.out.println(integer);
     }
+
+    @Test
+    public void test20() {
+        List<Integer> list = Arrays.asList(1, 6, 3, 4, 6, 7, 9, 6, 20);
+        List<Integer> collect = list.stream().filter(x -> x % 2 == 0).collect(Collectors.toList());
+        Set<Integer> collect1 = list.stream().filter(x -> x % 2 == 0).collect(Collectors.toSet());
+        System.out.println(collect);
+        System.out.println(collect1);
+
+        Map<String, Person> collect2 = personList.stream().filter(p -> p.getSalary() > 8000).collect(Collectors.toMap(Person::getName, p -> p));
+        System.out.println(collect2);
+    }
+
+    @Test
+    public void test21() {
+        Long collect = personList.stream().collect(Collectors.counting());
+        System.out.println(collect);
+        Double collect1 = personList.stream().collect(Collectors.averagingDouble(Person::getSalary));
+        System.out.println(collect1);
+        Double collect2 = personList.stream().collect(Collectors.summingDouble(Person::getSalary));
+        System.out.println(collect2);
+        Optional<Integer> collect3 = personList.stream().map(person -> person.getSalary()).collect(Collectors.maxBy(Integer::sum));
+        System.out.println(collect3.get());
+        Person person = personList.stream().max((x, y) -> x.getSalary() > y.getSalary() ? 1 : -1).get();
+        System.out.println(person);
+    }
+
+    @Test
+    public void test22(){
+        Map<Boolean, List<Person>> collect = personList.stream().collect(Collectors.groupingBy(p -> p.getSalary() > 8000));
+        System.out.println(collect);
+        Map<String, Map<String, List<Person>>> collect1 = personList.stream().collect(Collectors.groupingBy(p -> p.getSex(), Collectors.groupingBy(p -> p.getArea())));
+        System.out.println(collect1);
+    }
+
+    @Test
+    public void test23(){
+        String collect = personList.stream().map(p -> p.getArea()).collect(Collectors.joining(","));
+        System.out.println(collect);
+    }
+
+    @Test
+    public void test24(){
+        List<String> collect = personList.stream().sorted(Comparator.comparing(Person::getSalary)).map(p -> p.getName()).collect(Collectors.toList());
+        System.out.println(collect);
+        List<String> collect1 = personList.stream().sorted(Comparator.comparing(Person::getSalary).reversed()).map(p -> p.getName()).collect(Collectors.toList());
+        System.out.println(collect1);
+        List<String> collect2 = personList.stream().sorted(Comparator.comparing(Person::getSalary).thenComparing(Person::getAge)).map(p -> p.getName()).collect(Collectors.toList());
+        System.out.println(collect2);
+    }
+
+
 
 }
