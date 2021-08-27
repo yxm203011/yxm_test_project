@@ -1,24 +1,46 @@
 package factory.support;
 
+import cn.hutool.core.bean.BeanUtil;
 import factory.BeansException;
+import factory.PropertyValue;
+import factory.PropertyValues;
 import factory.config.BeanDefinition;
+import factory.config.BeanReference;
 
 import java.lang.reflect.Constructor;
 
-public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFactory{
+public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFactory {
 
     private InstantiationStrategy instantiationStrategy = new CglibSubclassingInstantiationStrategy();
 
     @Override
-    protected Object createBean(String beanName, BeanDefinition beanDefinition,Object[] args) throws BeansException {
+    protected Object createBean(String beanName, BeanDefinition beanDefinition, Object[] args) throws BeansException {
         Object bean = null;
-        try{
-            bean = createBeanInstance(beanDefinition,beanName,args);
-        }catch(Exception e){
-            throw new BeansException("Instantiation of bean failed",e);
+        try {
+            bean = createBeanInstance(beanDefinition, beanName, args);
+            applyPropertyValues(beanName, bean, beanDefinition);
+        } catch (Exception e) {
+            throw new BeansException("Instantiation of bean failed", e);
         }
-        addSingletonObject(beanName,bean);
+        addSingletonObject(beanName, bean);
         return bean;
+    }
+
+    protected void applyPropertyValues(String beanName, Object bean, BeanDefinition beanDefinition) {
+        try {
+            PropertyValues propertyValues = beanDefinition.getPropertyValues();
+            for (PropertyValue propertyValue : propertyValues.getPropertyValues()) {
+                String name = propertyValue.getName();
+                Object value = propertyValue.getValue();
+                if(value instanceof BeanReference){
+                    BeanReference value1 = (BeanReference) value;
+                    value = getBean(value1.getBeanName());
+                }
+                BeanUtil.setFieldValue(bean,name,value);
+            }
+        } catch (Exception e) {
+
+        }
     }
 
     protected Object createBeanInstance(BeanDefinition beanDefinition, String beanName, Object[] args) {

@@ -1,8 +1,12 @@
 package test;
 
+import factory.PropertyValue;
+import factory.PropertyValues;
 import factory.config.BeanDefinition;
+import factory.config.BeanReference;
 import factory.support.DefaultListableBeanFactory;
 import org.junit.Test;
+import test.bean.UserDao;
 import test.bean.UserService;
 
 
@@ -14,19 +18,25 @@ import test.bean.UserService;
 public class ApiTest {
 
     @Test
-    public void test_BeanFactory(){
+    public void test_BeanFactory() {
         // 1.初始化 BeanFactory
         DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory();
 
         // 2.注册 bean
-        BeanDefinition beanDefinition = new BeanDefinition(UserService.class);
+        beanFactory.registerBeanDefinition("userDao", new BeanDefinition(UserDao.class));
+
+        //
+        PropertyValues propertyValues = new PropertyValues();
+        propertyValues.addPropertyValue(new PropertyValue("uId", "10001"));
+        propertyValues.addPropertyValue(new PropertyValue("userDao", new BeanReference("userDao")));
+
+        BeanDefinition beanDefinition = new BeanDefinition(UserService.class, propertyValues);
         beanFactory.registerBeanDefinition("userService", beanDefinition);
 
-        // 3.第一次获取 bean
-        UserService userService = (UserService) beanFactory.getBean("userService","洋");
+        UserService userService = (UserService) beanFactory.getBean("userService");
         userService.queryUserInfo();
-    }
 
+    }
 
 
 }
