@@ -1,12 +1,11 @@
-package factory.support;
+package Beans.factory.support;
 
+import Beans.factory.config.BeanDefinition;
+import Beans.factory.config.BeanReference;
 import cn.hutool.core.bean.BeanUtil;
-import factory.BeansException;
-import factory.PropertyValue;
-import factory.PropertyValues;
-import factory.config.BeanDefinition;
-import factory.config.BeanReference;
-
+import Beans.BeansException;
+import Beans.PropertyValue;
+import Beans.PropertyValues;
 import java.lang.reflect.Constructor;
 
 public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFactory {

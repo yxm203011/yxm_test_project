@@ -1,11 +1,12 @@
-package factory.support;
+package Beans.factory.support;
 
-import factory.config.BeanDefinition;
+
+import Beans.factory.config.BeanDefinition;
 
 import java.lang.reflect.Constructor;
 
 //JDK实例化
-public class SimpleInstantiationStrategy implements InstantiationStrategy{
+public class SimpleInstantiationStrategy implements InstantiationStrategy {
 
     @Override
     public Object instantiate(BeanDefinition beanDefinition, String beanName, Constructor ctor, Object[] args) {

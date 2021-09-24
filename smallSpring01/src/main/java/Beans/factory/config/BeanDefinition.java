@@ -1,6 +1,6 @@
-package factory.config;
+package Beans.factory.config;
 
-import factory.PropertyValues;
+import Beans.PropertyValues;
 
 public class BeanDefinition {
     private Class beanClass;
@@ -9,6 +9,7 @@ public class BeanDefinition {
 
     public BeanDefinition(Class beanClass) {
         this.beanClass = beanClass;
+        this.propertyValues = new PropertyValues();
     }
 
     public Class getBeanClass() {
@@ -17,7 +18,7 @@ public class BeanDefinition {
 
     public BeanDefinition(Class beanClass, PropertyValues propertyValues) {
         this.beanClass = beanClass;
-        this.propertyValues = propertyValues;
+        this.propertyValues = propertyValues != null ? propertyValues : new PropertyValues();
     }
 
     public PropertyValues getPropertyValues() {

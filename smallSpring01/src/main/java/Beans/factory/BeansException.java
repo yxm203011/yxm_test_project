@@ -1,4 +1,4 @@
-package factory;
+package Beans.factory;
 
 public class BeansException extends RuntimeException {
     public BeansException(String msg) {

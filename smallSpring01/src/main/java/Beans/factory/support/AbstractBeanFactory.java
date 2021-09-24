@@ -1,9 +1,9 @@
-package factory.support;
+package Beans.factory.support;
 
 
-import factory.BeanFactory;
-import factory.BeansException;
-import factory.config.BeanDefinition;
+import Beans.BeansException;
+import Beans.factory.BeanFactory;
+import Beans.factory.config.BeanDefinition;
 
 public abstract class AbstractBeanFactory extends DefaultSingletonBeanRegistry implements BeanFactory {
     @Override
@@ -18,6 +18,11 @@ public abstract class AbstractBeanFactory extends DefaultSingletonBeanRegistry i
         }
         BeanDefinition beanDefinition = getBeanDefinition(beanName);
         return (T)createBean(beanName,beanDefinition,args);
+    }
+
+    @Override
+    public <T> T getBean(String name, Class<T> requiredType) throws Beans.factory.BeansException {
+        return (T) getBean(name);
     }
 
     @Override

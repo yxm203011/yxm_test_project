@@ -1,4 +1,4 @@
-package factory.config;
+package Beans.factory.config;
 
 public class BeanReference {
     private final String beanName;

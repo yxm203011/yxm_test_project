@@ -1,13 +1,20 @@
 package test;
 
-import factory.PropertyValue;
-import factory.PropertyValues;
-import factory.config.BeanDefinition;
-import factory.config.BeanReference;
-import factory.support.DefaultListableBeanFactory;
+import Beans.PropertyValue;
+import Beans.PropertyValues;
+import Beans.factory.config.BeanDefinition;
+import Beans.factory.config.BeanReference;
+import Beans.factory.support.DefaultListableBeanFactory;
+import Beans.factory.xml.XmlBeanDefinitionReader;
+import cn.hutool.core.io.IoUtil;
+import core.io.DefaultResourceLoader;
+import core.io.Resource;
+import org.junit.Before;
 import org.junit.Test;
 import test.bean.UserDao;
 import test.bean.UserService;
+
+import java.io.InputStream;
 
 
 /**
@@ -37,6 +44,51 @@ public class ApiTest {
         userService.queryUserInfo();
 
     }
+
+    private DefaultResourceLoader defaultResourceLoader;
+
+    @Before
+    public void init(){
+        defaultResourceLoader = new DefaultResourceLoader();
+    }
+
+    @Test
+    public void test1() throws Exception{
+        Resource resource = defaultResourceLoader.getResource("classPath:important.properties");
+        InputStream inputStream = resource.getInputStream();
+        String s = IoUtil.readUtf8(inputStream);
+        System.out.println(s);
+    }
+
+    @Test
+    public void test2() throws Exception{
+        Resource resource = defaultResourceLoader.getResource("src/test/resources/important.properties");
+        InputStream inputStream = resource.getInputStream();
+        String s = IoUtil.readUtf8(inputStream);
+        System.out.println(s);
+    }
+
+    @Test
+    public void test3() throws Exception{
+        Resource resource = defaultResourceLoader.getResource("https://github.com/yxm203011/UsedCar/blob/master/ideaworkspaces/UsedCar/src/main/resources/application.properties");
+        InputStream inputStream = resource.getInputStream();
+        String s = IoUtil.readUtf8(inputStream);
+        System.out.println(s);
+    }
+
+    @Test
+    public void test4(){
+        DefaultListableBeanFactory defaultListableBeanFactory = new DefaultListableBeanFactory();
+        // 2. 读取配置文件&注册Bean
+        XmlBeanDefinitionReader reader = new XmlBeanDefinitionReader(defaultListableBeanFactory);
+        reader.localBeanDefinitions("classPath:spring.xml");
+
+        // 3. 获取Bean对象调用方法
+        UserService userService = defaultListableBeanFactory.getBean("userService", UserService.class);
+        String result = userService.queryUserInfo();
+        System.out.println("测试结果：" + result);
+    }
+
 
 
 }

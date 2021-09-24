@@ -1,12 +1,12 @@
-package factory.support;
+package Beans.factory.support;
 
-import factory.config.BeanDefinition;
+import Beans.factory.config.BeanDefinition;
 import org.springframework.cglib.proxy.Enhancer;
 import org.springframework.cglib.proxy.NoOp;
 
 import java.lang.reflect.Constructor;
 
-public class CglibSubclassingInstantiationStrategy implements InstantiationStrategy{
+public class CglibSubclassingInstantiationStrategy implements InstantiationStrategy {
 
     @Override
     public Object instantiate(BeanDefinition beanDefinition, String beanName, Constructor ctor, Object[] args) {
