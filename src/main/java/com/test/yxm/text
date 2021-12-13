@@ -1,0 +1,134 @@
+多态:
+针对于某个方法调用时，在调用前不确定调用的是哪个方法，其真正执行的方法取决于运行时期实际类型的方法
+示例
+public class Main {
+    public static void main(String[] args) {
+        Person p = new Student();
+        p.run(); // 应该打印Person.run还是Student.run?
+    }
+}
+
+class Person {
+    public void run() {
+        System.out.println("Person.run");
+    }
+}
+
+class Student extends Person {
+    @Override
+    public void run() {
+        System.out.println("Student.run");
+    }
+}
+由此可见调用的是student的run方法;
+
+
+抽象类：
+抽象类的本身设计只能用于被继承，因此抽象类可以强迫子类必须实现其定义的抽象方法，否则会编译失败
+示例：
+public class Main {
+    public static void main(String[] args) {
+        Person p = new Student();
+        p.run();
+    }
+}
+
+abstract class Person {
+    public abstract void run();
+}
+
+class Student extends Person {
+    @Override
+    public void run() {
+        System.out.println("Student.run");
+    }
+}
+
+接口：
+在java中使用Interface声明一个接口
+抽象类和接口的区别：	abstract class	            interface
+          继承	    只能extends一个class	        可以implements多个interface
+          字段	    可以定义实例字段	            不能定义实例字段
+          抽象方法	可以定义抽象方法	            可以定义抽象方法
+          非抽象方法	可以定义非抽象方法	            可以定义default方法
+示例：
+interface Person {
+    void run();
+    String getName();
+}
+class Student implements Person {
+    private String name;
+
+    public Student(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public void run() {
+        System.out.println(this.name + " run");
+    }
+
+    @Override
+    public String getName() {
+        return this.name;
+    }
+}
+实现类可以不必覆写default方法。default方法的目的是，当我们需要给接口新增一个方法时，会涉及到修改全部子类。如果新增的是default方法，那么子类就不必全部修改，只需要在需要覆写的地方去覆写新增方法。
+default方法和抽象类的普通方法是有所不同的。因为interface没有字段，default方法无法访问字段，而抽象类的普通方法可以访问实例字段
+示例：public class Main {
+    public static void main(String[] args) {
+        Person p = new Student("Xiao Ming");
+        p.run();
+    }
+}
+
+interface Person {
+    String getName();
+    default void run() {
+        System.out.println(getName() + " run");
+    }
+}
+
+class Student implements Person {
+    private String name;
+
+    public Student(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+}
+
+
+静态变量和静态方法:
+用static关键字修饰的字段为静态变量
+用static关键字修饰的方法为静态方法
+静态方法和静态变量都可以通过类名调用
+示例：
+public class Main {
+    public static void main(String[] args) {
+        Person.setNumber(99);
+        System.out.println(Person.number);
+    }
+}
+
+class Person {
+    public static int number;
+
+    public static void setNumber(int value) {
+        number = value;
+    }
+}
+
+
+public、private、protected关键字的作用域:
+public修饰的类和接口可以被其他的任何类访问
+private修饰的字段和方法只能在当前类中使用
+protected修饰的方法可以被子类访问，也可以被子类的子类访问
+
+
+泛型：
+java中的泛型是在编译器编译时实行的，编译器永远将泛型T 看成Object处理，但是在需要转型的时候编译器才会将T进行强制转换类型
+
