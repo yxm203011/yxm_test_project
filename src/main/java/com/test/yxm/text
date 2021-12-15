@@ -132,3 +132,27 @@ protected修饰的方法可以被子类访问，也可以被子类的子类访�
 泛型：
 java中的泛型是在编译器编译时实行的，编译器永远将泛型T 看成Object处理，但是在需要转型的时候编译器才会将T进行强制转换类型
 
+
+File文件
+在创建File的时候 并不会对磁盘进行操作 只有在调用file中的某个方法时才会进行真正的磁盘操作
+file.getPath();//获取File file = new File("1111");传入路径 也就是获取1111
+file.getAbsolutePath();//获取绝对路径
+file.getCanonication();//获取规范路径（有一些路径会用..来表示上级 这个是将..转换为/）
+file.isFile();//判断当前文件是否存在
+file.isDirectory();//判断当前文件夹是否存在
+file.delete();//删除文件 并返回 true或者false 判断是否删除成功
+file.deleteOnExit();//JVM退出后自动删除文件
+file.listFiles();//列出目录下的所有子集
+file.list();//也是列出目录下的所有子集只不过listFiles提供了重载的方法 可以过滤掉一些不要的文件或目录
+
+
+InputStream(输入流)
+InputStream和FileInputStream都是输入流FileInputStream是InputStream的子类  FileInputStream是从文件流中获取
+执行完成之后必须执行colse方法关闭流  避免资源浪费
+inputStream.read();方法读取输入流的下一个字节如果是-1就表示不能再读取了
+如果每次都一个字节一个字节读取效率很慢也会浪费资源 所以一般使用缓存   在read()方法中传入byte[]数组  表示读取若干个字节并填充到byte中
+
+
+OutPutStream(输出流)
+outPutStream.write(int i);写入一个字节到输出流
+outPutStream.flush();因为输出流不是读取一个字节就输出 而是有一个相当于byte的缓存等缓存满了再输出 而flush是强制将缓存中的内容输出
