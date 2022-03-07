@@ -79,7 +79,7 @@ public class test {
     //线程
     //Synchronized来实现线程同步，实现线程安全，适用wait使线程进入等待状态，使用notify来随机唤醒一个线程，使用notifyAll来唤醒所有等待的线程
     //ReenTrantLock也是用来线程同步的，与Synchronized的区别就是ReentrantLock是Java5引用的一个处理高并发的包简化了多线程编程的代码
-    //ReenTrantLock使用await()使线程进入等待状态使用siginal()随机唤醒一个等待的线程使用siginalAll()唤醒所有线程
+    //ReenTrantLock使用await()使线程进入等待状态使用signal()随机唤醒一个等待的线程使用signalAll()唤醒所有线程
 
     /*public static void main(String[] args) throws InterruptedException {
         Thread thread = new thread();
@@ -221,5 +221,7 @@ public class test {
         }
         return Math.sqrt(currentX * currentX + currentY * currentY);
     }*/
+
+
 
 }
