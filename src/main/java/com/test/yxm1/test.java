@@ -4,6 +4,10 @@ import javax.annotation.Resource;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.*;
 
 public class test {
@@ -222,6 +226,45 @@ public class test {
         return Math.sqrt(currentX * currentX + currentY * currentY);
     }*/
 
+    //线程池
+    //ExecutorService ex = Executors.newFixedThreadPool(4);创建一个大小为4的线程池如果线程多的话 会进行等待有空余的线程才会执行
+    //使用ex.shutDown()来结束线程池
+    //ScheduledThreadPoolExecutor ex = new ScheduledThreadPoolExecutor(4);创建一个反复执行的线程池
+    //ex.schedule(new Thread,5,TimeUnit.SECONDS);在5秒延迟后只执行1次
+    //ex.scheduleAtFixedRate(new Thread(),2,3,TimeUnit.SECONDS);在2秒后开始执行每3秒执行一次
+    //ex.scheduleWithFixedDelay(new Thread(),2,3,TimeUnit.SECONDS);在2秒后执行 执行完一次后等待3秒后再接着执行
+    //AtFixedRate和WithFixedDelay的区别就是AtFixedRate是固定指定时间后执行不管你这次有没有执行完而WithFixedDelay则是当前这次执行完成之后等待固定时间才会执行下次
+
+
+    /*public static void main(String[] args) throws InterruptedException {
+        ScheduledThreadPoolExecutor ex = new ScheduledThreadPoolExecutor(4);
+        for (int i = 0; i < 5; i++) {
+            //提交任务，在指定延迟后只执行一次
+            ex.schedule(new thread1(i+""),1,TimeUnit.SECONDS);
+            ex.scheduleAtFixedRate(new thread1(i+""),2,3,TimeUnit.SECONDS);
+            ex.scheduleWithFixedDelay(new thread1(i+""),2,3,TimeUnit.SECONDS);
+        }
+    }
+
+
+    static class thread1 extends Thread{
+        private final String name;
+
+        public thread1(String name){
+            this.name = name;
+        }
+
+        @Override
+        public void run(){
+            System.out.println("start task" + name);
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println("end task" + name);
+        }
+    }*/
 
 
 }
