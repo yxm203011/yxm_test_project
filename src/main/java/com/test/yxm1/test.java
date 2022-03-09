@@ -1,14 +1,6 @@
 package com.test.yxm1;
 
-import javax.annotation.Resource;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.locks.*;
+import java.util.concurrent.*;
 
 public class test {
 
@@ -263,6 +255,37 @@ public class test {
                 e.printStackTrace();
             }
             System.out.println("end task" + name);
+        }
+    }*/
+
+    //Future是线程池运行callable的返回  后面可以接泛型  使用get获取callable的结果值
+    /*public static void main(String[] args) throws ExecutionException, InterruptedException {
+        ExecutorService executorService = Executors.newFixedThreadPool(4);
+        Callable<String> th = new thread("你");
+        Future<String> submit = executorService.submit(th);
+        while(!submit.isDone()){
+            System.out.println("等待结束");
+        }
+        String s = submit.get();
+        System.out.println(s);
+        executorService.shutdown();
+
+    }
+
+    static class thread implements Callable<String> {
+        private final String name;
+
+        public thread(String name ){
+            this.name = name;
+        }
+
+        @Override
+        public String call() throws Exception {
+            int returnNum = 0;
+            for (int i = 0; i < 10; i++) {
+                returnNum += i;
+            }
+            return name + ":" + returnNum;
         }
     }*/
 
