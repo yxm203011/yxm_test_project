@@ -8,6 +8,9 @@ import org.junit.Test;
 
 import java.math.BigDecimal;
 import java.util.*;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 public class testMain {
     private static List<project> listProject = new ArrayList<>();
@@ -113,6 +116,46 @@ public class testMain {
         employees.stream().filter(e -> e.getSalary() > 2.22).forEach(System.out::println);
         System.out.println("-----------");
         employees.stream().map(Employee::getName).forEach(System.out::println);
+    }
+
+    @Test
+    public void test8(){
+        Predicate<Integer> predicate = n -> n > 4;
+        boolean test = predicate.test(3);
+        System.out.println(test);
+    }
+
+    @Test
+    //生成指定长度的随机字符串
+    public void test9(){
+        Function<Integer,String> randomStringFunction = l -> {
+          String chars = "abcdefjhigklmnopqrstuvwxyz0123456789";
+          StringBuffer stringBuffer = new StringBuffer();
+          Random random = new Random();
+            for (Integer i = 0; i < l; i++) {
+                int i1 = random.nextInt(chars.length());
+                stringBuffer.append(chars.charAt(i1));
+            }
+          return stringBuffer.toString();
+        };
+        String apply = randomStringFunction.apply(19);
+        System.out.println(apply);
+    }
+
+    @Test
+    public void test10(){
+        Predicate<String> predicate = m -> m.equals("a");
+        System.out.println(predicate.test("b"));
+    }
+
+    @Test
+    public void test11(){
+        outputValue(m -> System.out.println("像控制台打印"));
+    }
+
+    public void outputValue(Consumer<String> consumer){
+        String test = "这是一个文本";
+        consumer.accept(test);
     }
 
 }
