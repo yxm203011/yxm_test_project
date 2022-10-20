@@ -6,6 +6,8 @@
     <modules>
         <module>smallSpring</module>
         <module>smallSpring01</module>
+        <module>s01</module>
+        <module>s02</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>

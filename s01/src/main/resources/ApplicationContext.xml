@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="sweetApple" class="com.yxm.spring.ioc.entity.Apple">
+        <property name="title" value="红富士"></property>
+        <property name="origin" value="欧洲"></property>
+        <property name="color" value="红色"></property>
+    </bean>
+    <bean id="sourApple" class="com.yxm.spring.ioc.entity.Apple">
+        <property name="title" value="青苹果"></property>
+        <property name="origin" value="中亚"></property>
+        <property name="color" value="绿色"></property>
+    </bean>
+    <bean id="softApple" class="com.yxm.spring.ioc.entity.Apple">
+        <property name="title" value="金帅"></property>
+        <property name="origin" value="中国"></property>
+        <property name="color" value="黄色"></property>
+    </bean>
+    <bean id="rdApple" class="com.yxm.spring.ioc.entity.Apple">
+        <property name="title" value="蛇果"></property>
+        <property name="origin" value="美国"></property>
+        <property name="color" value="红色"></property>
+    </bean>
+
+    <bean id="child1" class="com.yxm.spring.ioc.entity.Chlid">
+        <property name="name" value="孩子1"></property>
+        <property name="apple" ref="rdApple"></property>
+    </bean>
+    <bean id="child2" class="com.yxm.spring.ioc.entity.Chlid">
+        <property name="name" value="孩子2"></property>
+        <property name="apple" ref="sourApple"></property>
+    </bean>
+    <bean id="child3" class="com.yxm.spring.ioc.entity.Chlid">
+        <property name="name" value="孩子3"></property>
+        <property name="apple" ref="softApple"></property>
+    </bean>
+</beans>
