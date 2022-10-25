@@ -16,4 +16,9 @@
         <property name="apple" ref="sweetApple"/>
     </bean>
 
+    <bean id="name2" class="com.yxm.spring.ioc.entity.Chlid">
+        <constructor-arg name="name" value="张三"/>
+        <constructor-arg name="apple" ref="sweetApple"/>
+    </bean>
+
 </beans>
