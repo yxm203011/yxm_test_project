@@ -11,6 +11,13 @@
         <property name="price" value="199.3"/>
     </bean>
 
+    <bean id="sourApple" class="com.yxm.spring.ioc.entity.Apple">
+        <property name="title" value="青苹果"/>
+        <property name="color" value="绿色"/>
+        <property name="origin" value="绿洲"/>
+        <property name="price" value="99.3"/>
+    </bean>
+
     <bean id="name1" class="com.yxm.spring.ioc.entity.Chlid">
         <property name="name" value="张三"/>
         <property name="apple" ref="sweetApple"/>
@@ -20,5 +27,16 @@
         <constructor-arg name="name" value="张三"/>
         <constructor-arg name="apple" ref="sweetApple"/>
     </bean>
+
+    <bean id="name3" class="com.yxm.spring.ioc.entity.Chlid">
+        <property name="name" value="张三"/>
+        <property name="appleList">
+                <list>
+                    <ref bean="sweetApple"></ref>
+                    <ref bean="sourApple"></ref>
+                </list>
+        </property>
+    </bean>
+
 
 </beans>

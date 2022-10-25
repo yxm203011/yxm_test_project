@@ -1,10 +1,14 @@
 package com.yxm.spring.ioc.entity;
 
+import java.util.List;
+
 public class Chlid {
 
     private String name;
 
     private Apple apple;
+
+    private List<Apple> appleList;
 
     public Chlid() {
     }
@@ -32,5 +36,13 @@ public class Chlid {
     }
     public void eat(){
         System.out.println(name+"吃到了"+apple.getOrigin()+"种植的"+apple.getTitle());
+    }
+
+    public List<Apple> getAppleList() {
+        return appleList;
+    }
+
+    public void setAppleList(List<Apple> appleList) {
+        this.appleList = appleList;
     }
 }
