@@ -9,6 +9,7 @@
         <module>s01</module>
         <module>s02</module>
         <module>s03</module>
+        <module>s04</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
