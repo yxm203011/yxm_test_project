@@ -10,6 +10,20 @@
         <property name="price" value="10.2"/>
     </bean>
 
+    <bean class="com.yxm.spring.ioc.bookshop.entity.Computer">
+        <property name="brand" value="品牌1"/>
+        <property name="type" value="笔记本1"/>
+        <property name="sn" value="描述1"/>
+        <property name="price" value="10.1"/>
+    </bean>
+
+    <bean class="com.yxm.spring.ioc.bookshop.entity.Computer">
+        <property name="brand" value="品牌2"/>
+        <property name="type" value="笔记本2"/>
+        <property name="sn" value="描述2"/>
+        <property name="price" value="10.2"/>
+    </bean>
+
     <bean id="company" class="com.yxm.spring.ioc.bookshop.entity.Company">
         <property name="rooms">
             <list>
