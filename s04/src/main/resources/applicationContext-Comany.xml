@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="computer" class="com.yxm.spring.ioc.bookshop.entity.Computer">
+        <property name="brand" value="品牌"/>
+        <property name="type" value="笔记本"/>
+        <property name="sn" value="描述"/>
+        <property name="price" value="10.2"/>
+    </bean>
+
+    <bean id="company" class="com.yxm.spring.ioc.bookshop.entity.Company">
+        <property name="rooms">
+            <list>
+                <value>总裁办</value>
+                <value>总经理办公室</value>
+                <value>会议室</value>
+                <value>会议室</value>
+            </list>
+        </property>
+        <property name="computerMap">
+            <map>
+                <entry key="dev-88172" value-ref="computer"></entry>
+                <entry key="dev-88173">
+                    <bean class="com.yxm.spring.ioc.bookshop.entity.Computer">
+                        <property name="brand" value="品牌1"/>
+                        <property name="type" value="笔记本1"/>
+                        <property name="sn" value="描述1"/>
+                        <property name="price" value="10.3"/>
+                    </bean>
+                </entry>
+            </map>
+        </property>
+        <property name="info">
+            <props>
+                <prop key="phone">15738580773</prop>
+                <prop key="name">我</prop>
+            </props>
+        </property>
+    </bean>
+</beans>
