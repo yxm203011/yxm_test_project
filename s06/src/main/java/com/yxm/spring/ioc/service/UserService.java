@@ -11,6 +11,6 @@ public class UserService {
         System.out.println("正在创建UserService");
     }
 
-    @Autowired
+    //@Autowired
     private IUserDao udao;
 }
