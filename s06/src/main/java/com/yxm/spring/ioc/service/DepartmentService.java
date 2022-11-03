@@ -9,9 +9,9 @@ import javax.annotation.Resource;
 public class DepartmentService {
 
     @Resource
-    private IUserDao udao;
+    private IUserDao userDao;
 
     public void thisType(){
-        System.out.println(udao);
+        System.out.println(userDao);
     }
 }
