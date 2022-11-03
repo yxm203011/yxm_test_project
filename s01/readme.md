@@ -16,3 +16,7 @@ Spring IOC容器初体验，用于理解IOC容器用途
 @PostConstruct加在方法上面  表示当前bean加载成功之后会调用这个方法  可以理解为配置文件中的init-method
 @Configuration表示当前类是配置类 ioc会自动扫描
 @ComponentScan扫描指定路径文件@ComponentScan(basePackages="classpath:路径") 相当于配置文件中的<context:component-scan base-package="路径"/>
+
+单元测试
+@RunWith(SpringJUnit4ClassRunner.class)获取junit执行权交由ioc执行 会在测试用例执行前初始化ioc容器
+@ContextConfiguration(locations = {"classpath:配置文件路径"})扫描哪个配置文件

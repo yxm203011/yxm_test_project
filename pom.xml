@@ -13,6 +13,7 @@
         <module>s05</module>
         <module>s06</module>
         <module>s07</module>
+        <module>s08</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -47,6 +48,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <artifactId>spring-test</artifactId>
+                    <groupId>org.springframework</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.mybatis.spring.boot/mybatis-spring-boot-starter -->
         <dependency>
@@ -71,6 +78,11 @@
             <groupId>jaxen</groupId>
             <artifactId>jaxen</artifactId>
             <version>1.1.6</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>5.3.9</version>
         </dependency>
     </dependencies>
 
