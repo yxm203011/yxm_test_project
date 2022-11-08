@@ -9,6 +9,18 @@ public class Computer {
 
     private Float price;
 
+    public void insert(String name){
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println("添加方法"+name);
+    }
+    public String update(){
+        return "修改";
+    }
+
     public String getBrand() {
         return brand;
     }
@@ -49,15 +61,5 @@ public class Computer {
         this.type = type;
         this.sn = sn;
         this.price = price;
-    }
-
-    @Override
-    public String toString() {
-        return "Computer{" +
-                "brand='" + brand + '\'' +
-                ", type='" + type + '\'' +
-                ", sn='" + sn + '\'' +
-                ", price=" + price +
-                '}';
     }
 }

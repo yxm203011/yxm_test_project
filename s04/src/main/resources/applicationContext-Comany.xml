@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-        https://www.springframework.org/schema/beans/spring-beans.xsd">
+        https://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd">
     <bean id="computer" class="com.yxm.spring.ioc.bookshop.entity.Computer">
         <property name="brand" value="品牌"/>
         <property name="type" value="笔记本"/>
@@ -53,4 +53,16 @@
             </props>
         </property>
     </bean>
+    <bean id="a" class="com.yxm.spring.ioc.bookshop.a"/>
+    <aop:config>
+        <aop:pointcut id="pointcut" expression="execution(* com.yxm.spring.ioc..*.*(..))"/>
+        <aop:aspect ref="a">
+            <!--<aop:before method="doBefore" pointcut-ref="pointcut"/>
+            <aop:after-returning method="doReturning" returning="obj" pointcut-ref="pointcut"/>
+            <aop:after method="doAfter" pointcut-ref="pointcut"/>
+            <aop:after-throwing method="doAfterThrowing" throwing="throwable" pointcut-ref="pointcut"/>-->
+            <aop:around method="check" pointcut-ref="pointcut"/>
+        </aop:aspect>
+    </aop:config>
+
 </beans>

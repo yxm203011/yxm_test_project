@@ -20,3 +20,16 @@ Spring IOC容器初体验，用于理解IOC容器用途
 单元测试
 @RunWith(SpringJUnit4ClassRunner.class)获取junit执行权交由ioc执行 会在测试用例执行前初始化ioc容器
 @ContextConfiguration(locations = {"classpath:配置文件路径"})扫描哪个配置文件
+
+Spring Aop：切面
+pointcut:execution(public * com.yxm.spring..*Service.*(..))
+                   public void com.yxm.spring xxxService.所有方法(所有参数)
+JoinPoint： joinPoint.getTarget()获取当前ioc正在执行的类；
+            joinPoint.getSignature()获取方法名称；
+            joinPoint.getArgs()获取这个方法所有的参数；
+通知的5种类型(S4中示例)
+Before Advice：前置通知，目标方法执行前执行
+After Returning Advice：返回后通知，目标方法返回数据后执行
+After Throwing Advice：异常通知，目标方法抛异常时执行
+After Advice：后置通知，目标方法执行完后执行
+Around Advice：最强大的通知，自定义通知执行时机，可决定目标方法是否运行
