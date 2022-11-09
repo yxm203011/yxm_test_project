@@ -5,7 +5,7 @@
         https://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <!--    使用有参数的构造方法创建对象-->
-    <bean name="apple2,apple7" class="com.yxm.spring.ioc.entity.Apple">
+    <bean name="apple2,apple7" class="com.yxm.spring.aop.entity.Apple">
         <constructor-arg name="title" value="红富士1"></constructor-arg>
         <constructor-arg name="color" value="红色1"></constructor-arg>
         <constructor-arg name="origin" value="欧洲1"></constructor-arg>
@@ -13,7 +13,7 @@
     </bean>
 
     <!--    使用有参数的构造方法创建对象-->
-    <bean class="com.yxm.spring.ioc.entity.Apple">
+    <bean class="com.yxm.spring.aop.entity.Apple">
         <constructor-arg name="title" value="红富士3"></constructor-arg>
         <constructor-arg name="color" value="红色3"></constructor-arg>
         <constructor-arg name="origin" value="欧洲3"></constructor-arg>

@@ -1,4 +1,4 @@
-import com.yxm.spring.ioc.service.UserService;
+import com.yxm.spring.aop.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;

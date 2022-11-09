@@ -6,10 +6,10 @@
         https://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context
         https://www.springframework.org/schema/context/spring-context.xsd">
-    <bean id="userDao" class="com.yxm.spring.ioc.dao.UserDao">
+    <bean id="userDao" class="com.yxm.spring.aop.dao.UserDao">
 
     </bean>
-    <bean id="userService" class="com.yxm.spring.ioc.service.UserService">
+    <bean id="userService" class="com.yxm.spring.aop.service.UserService">
         <property name="userDao" ref="userDao"></property>
     </bean>
 

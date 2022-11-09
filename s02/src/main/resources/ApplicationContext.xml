@@ -4,18 +4,18 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         https://www.springframework.org/schema/beans/spring-beans.xsd">
     <!--    Bean标签默认使用默认构造方法创建对象-->
-    <bean id="apple1" class="com.yxm.spring.ioc.entity.Apple">
+    <bean id="apple1" class="com.yxm.spring.aop.entity.Apple">
     </bean>
 
     <!--    使用有参数的构造方法创建对象-->
-    <bean id="apple2" class="com.yxm.spring.ioc.entity.Apple">
+    <bean id="apple2" class="com.yxm.spring.aop.entity.Apple">
         <constructor-arg name="title" value="红富士"></constructor-arg>
         <constructor-arg name="color" value="红色"></constructor-arg>
         <constructor-arg name="origin" value="欧洲"></constructor-arg>
         <constructor-arg name="price" value="10.1"></constructor-arg>
     </bean>
 
-    <bean id="apple3" class="com.yxm.spring.ioc.entity.Apple">
+    <bean id="apple3" class="com.yxm.spring.aop.entity.Apple">
         <constructor-arg index="0" value="红富士"></constructor-arg>
         <constructor-arg index="1" value="红色"></constructor-arg>
         <constructor-arg index="2" value="欧洲"></constructor-arg>
@@ -23,9 +23,9 @@
     </bean>
 
     <!-- 通过静态方法创建对象 -->
-    <bean id="apple4" class="com.yxm.spring.ioc.factory.AppleStaticFactory" factory-method="createSweetApple"/>
+    <bean id="apple4" class="com.yxm.spring.aop.factory.AppleStaticFactory" factory-method="createSweetApple"/>
 
-    <bean id="appleFactoryInstance" class="com.yxm.spring.ioc.factory.AppleFactoryInstance" />
+    <bean id="appleFactoryInstance" class="com.yxm.spring.aop.factory.AppleFactoryInstance" />
     <bean id="apple5" factory-bean="appleFactoryInstance" factory-method="createSweetApple"/>
 
 </beans>

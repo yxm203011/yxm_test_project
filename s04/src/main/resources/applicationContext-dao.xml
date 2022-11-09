@@ -4,7 +4,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         https://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="bookDao" class="com.yxm.spring.ioc.bookshop.dao.BookDaoOracleImpl">
+    <bean id="bookDao" class="com.yxm.spring.aop.bookshop.dao.BookDaoOracleImpl">
 
     </bean>
 

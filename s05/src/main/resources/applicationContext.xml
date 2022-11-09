@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <beans>
-    <bean id="sweetApple" class="com.yxm.spring.ioc.entity.Apple">
+    <bean id="sweetApple" class="com.yxm.spring.aop.entity.Apple">
         <property name="title" value="红富士"></property>
         <property name="color" value="红色"></property>
         <property name="origin" value="欧洲"></property>

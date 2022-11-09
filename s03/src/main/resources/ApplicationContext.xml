@@ -4,31 +4,31 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         https://www.springframework.org/schema/beans/spring-beans.xsd">
     <!--    Bean标签默认使用默认构造方法创建对象-->
-    <bean id="sweetApple" class="com.yxm.spring.ioc.entity.Apple">
+    <bean id="sweetApple" class="com.yxm.spring.aop.entity.Apple">
         <property name="title" value="红富士"/>
         <property name="color" value="红色"/>
         <property name="origin" value="欧洲"/>
         <property name="price" value="199.3"/>
     </bean>
 
-    <bean id="sourApple" class="com.yxm.spring.ioc.entity.Apple">
+    <bean id="sourApple" class="com.yxm.spring.aop.entity.Apple">
         <property name="title" value="青苹果"/>
         <property name="color" value="绿色"/>
         <property name="origin" value="绿洲"/>
         <property name="price" value="99.3"/>
     </bean>
 
-    <bean id="name1" class="com.yxm.spring.ioc.entity.Chlid">
+    <bean id="name1" class="com.yxm.spring.aop.entity.Chlid">
         <property name="name" value="张三"/>
         <property name="apple" ref="sweetApple"/>
     </bean>
 
-    <bean id="name2" class="com.yxm.spring.ioc.entity.Chlid">
+    <bean id="name2" class="com.yxm.spring.aop.entity.Chlid">
         <constructor-arg name="name" value="张三"/>
         <constructor-arg name="apple" ref="sweetApple"/>
     </bean>
 
-    <bean id="name3" class="com.yxm.spring.ioc.entity.Chlid">
+    <bean id="name3" class="com.yxm.spring.aop.entity.Chlid">
         <property name="name" value="张三"/>
         <property name="appleList">
                 <list>

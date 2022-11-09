@@ -3,28 +3,28 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         https://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd">
-    <bean id="computer" class="com.yxm.spring.ioc.bookshop.entity.Computer">
+    <bean id="computer" class="com.yxm.spring.aop.bookshop.entity.Computer">
         <property name="brand" value="品牌"/>
         <property name="type" value="笔记本"/>
         <property name="sn" value="描述"/>
         <property name="price" value="10.2"/>
     </bean>
 
-    <bean class="com.yxm.spring.ioc.bookshop.entity.Computer">
+    <bean class="com.yxm.spring.aop.bookshop.entity.Computer">
         <property name="brand" value="品牌1"/>
         <property name="type" value="笔记本1"/>
         <property name="sn" value="描述1"/>
         <property name="price" value="10.1"/>
     </bean>
 
-    <bean class="com.yxm.spring.ioc.bookshop.entity.Computer">
+    <bean class="com.yxm.spring.aop.bookshop.entity.Computer">
         <property name="brand" value="品牌2"/>
         <property name="type" value="笔记本2"/>
         <property name="sn" value="描述2"/>
         <property name="price" value="10.2"/>
     </bean>
 
-    <bean id="company" class="com.yxm.spring.ioc.bookshop.entity.Company">
+    <bean id="company" class="com.yxm.spring.aop.bookshop.entity.Company">
         <property name="rooms">
             <list>
                 <value>总裁办</value>
@@ -37,7 +37,7 @@
             <map>
                 <entry key="dev-88172" value-ref="computer"></entry>
                 <entry key="dev-88173">
-                    <bean class="com.yxm.spring.ioc.bookshop.entity.Computer">
+                    <bean class="com.yxm.spring.aop.bookshop.entity.Computer">
                         <property name="brand" value="品牌1"/>
                         <property name="type" value="笔记本1"/>
                         <property name="sn" value="描述1"/>
@@ -53,9 +53,9 @@
             </props>
         </property>
     </bean>
-    <bean id="a" class="com.yxm.spring.ioc.bookshop.a"/>
+    <bean id="a" class="com.yxm.spring.aop.bookshop.a"/>
     <aop:config>
-        <aop:pointcut id="pointcut" expression="execution(* com.yxm.spring.ioc..*.*(..))"/>
+        <aop:pointcut id="pointcut" expression="execution(* com.yxm.spring.aop..*.*(..))"/>
         <aop:aspect ref="a">
             <!--<aop:before method="doBefore" pointcut-ref="pointcut"/>
             <aop:after-returning method="doReturning" returning="obj" pointcut-ref="pointcut"/>

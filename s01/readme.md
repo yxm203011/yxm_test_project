@@ -32,4 +32,4 @@ Before Advice：前置通知，目标方法执行前执行
 After Returning Advice：返回后通知，目标方法返回数据后执行
 After Throwing Advice：异常通知，目标方法抛异常时执行
 After Advice：后置通知，目标方法执行完后执行
-Around Advice：最强大的通知，自定义通知执行时机，可决定目标方法是否运行
+Around Advice：最强大的通知（环绕通知），自定义通知执行时机，可决定目标方法是否运行
