@@ -13,6 +13,14 @@ public class ProxyInvocationHandler implements InvocationHandler {
         this.target = target;
     }
 
+    /**
+     *
+     * @param proxy 代理类的对象
+     * @param method 目标方法对象
+     * @param args 目标方法实参
+     * @return 目标方法运行后的值
+     * @throws Throwable 目标方法抛出的异常
+     */
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         System.out.println("======当前时间======");

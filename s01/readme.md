@@ -41,4 +41,4 @@ AOP底层实现原理:基于代理模式实现功能的扩展
   目标类和代理类都要实现相同的接口，并且代理类中要包含实现类，然后通过构造方法传入实现接口最后再调用指定方法
   例如：UserService userService = new UserServiceProxy1(new UserServiceProxy(new UserServiceImpl()));
 JDK动态代理：
-
+  必须实现接口才可以
