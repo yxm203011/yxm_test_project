@@ -42,3 +42,7 @@ AOP底层实现原理:基于代理模式实现功能的扩展
   例如：UserService userService = new UserServiceProxy1(new UserServiceProxy(new UserServiceImpl()));
 JDK动态代理：
   必须实现接口才可以
+  代理类需要实现InvocationHandler接口并重写invoke方法
+　　调用时需要使用jdk反射机制使用Proxy.newProxyInstance(employeeService.getClass().getClassLoader(),
+                                employeeService.getClass().getInterfaces(),
+                                new ProxyInvocationHandler(employeeService));//第一个参数为类加载器使用.getClassLoader()获取当前类的类加载器　　　　//第二个参数为类实现的接口通过getInterfaces()获取当前类实现了那些接口　　//第三个参数为代理类
