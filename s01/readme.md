@@ -33,3 +33,12 @@ After Returning Advice：返回后通知，目标方法返回数据后执行
 After Throwing Advice：异常通知，目标方法抛异常时执行
 After Advice：后置通知，目标方法执行完后执行
 Around Advice：最强大的通知（环绕通知），自定义通知执行时机，可决定目标方法是否运行
+
+AOP底层实现原理:基于代理模式实现功能的扩展
+代理模式
+  通过代理对象对原对象进行功能的扩展
+静态代理：
+  目标类和代理类都要实现相同的接口，并且代理类中要包含实现类，然后通过构造方法传入实现接口最后再调用指定方法
+  例如：UserService userService = new UserServiceProxy1(new UserServiceProxy(new UserServiceImpl()));
+JDK动态代理：
+
