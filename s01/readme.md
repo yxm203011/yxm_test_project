@@ -46,3 +46,6 @@ JDK动态代理：
 　　调用时需要使用jdk反射机制使用Proxy.newProxyInstance(employeeService.getClass().getClassLoader(),
                                 employeeService.getClass().getInterfaces(),
                                 new ProxyInvocationHandler(employeeService));//第一个参数为类加载器使用.getClassLoader()获取当前类的类加载器　　　　//第二个参数为类实现的接口通过getInterfaces()获取当前类实现了那些接口　　//第三个参数为代理类
+CGLib动态代理：
+  如果目标类没有实现接口，则自动使用CGLib通过继承的方式实现代理
+
