@@ -1,4 +1,4 @@
-Spring IOC容器初体验，用于理解IOC容器用途
+Spring IOC容器初体验，用于理解IOC容器用途（S01-S11）
 注解：
 @Bean定义一个bean bean名字就是方法名字
 @Value获取配置文件中的内容，@Value("${name}") 但是需要扫描配置文件使用<context:property-placeholder location=""/>扫描指定配置文件
