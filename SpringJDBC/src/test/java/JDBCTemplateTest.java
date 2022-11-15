@@ -1,3 +1,4 @@
+import com.yxm.spring.jdbc.Service.EmployeeService;
 import com.yxm.spring.jdbc.dao.EmployeeDao;
 import com.yxm.spring.jdbc.entity.Employee;
 import org.junit.Test;
@@ -16,6 +17,9 @@ public class JDBCTemplateTest {
 
     @Resource
     EmployeeDao employeeDao;
+
+    @Resource
+    EmployeeService employeeService;
 
     @Test
     public void testEmployeeById(){
@@ -60,9 +64,9 @@ public class JDBCTemplateTest {
         System.out.println("删除："+delete);
     }
 
-    public static void main(String[] args) {
-        String a = "";
-        Assert.hasText(a,"1111");
+    @Test
+    public void batchImport(){
+        employeeService.batchImport();
     }
 
 }
