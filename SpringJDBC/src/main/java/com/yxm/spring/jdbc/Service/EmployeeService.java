@@ -16,6 +16,7 @@ public class EmployeeService {
     //private DataSourceTransactionManager transactionManager;
 
     public void batchImport(){
+        //编程式事务
         /*TransactionDefinition transactionDefinition = new DefaultTransactionDefinition();
         TransactionStatus status = transactionManager.getTransaction(transactionDefinition);
         try{*/

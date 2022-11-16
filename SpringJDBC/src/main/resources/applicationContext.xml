@@ -39,7 +39,7 @@
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
-    <!-- 事务通知配置 决定哪些方法使用事务 -->
+    <!-- 事务通知配置 决定哪些方法使用事务 声明式事务 -->
     <tx:advice id="txAdvice" transaction-manager="transactionManager">
         <tx:attributes>
             <!-- 目标方法名为batchImport时，启用声明式事务，成功提交，运行异常时回滚 -->
