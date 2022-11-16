@@ -28,9 +28,13 @@
     <bean id="employeeDao" class="com.yxm.spring.jdbc.dao.EmployeeDao">
         <property name="jdbcTemplate" ref="jdbcTemplate"></property>
     </bean>
+    <bean id="batchService" class="com.yxm.spring.jdbc.Service.BatchService">
+        <property name="employeeDao" ref="employeeDao"/>
+    </bean>
 
     <bean id="employeeService" class="com.yxm.spring.jdbc.Service.EmployeeService">
         <property name="employeeDao" ref="employeeDao"/>
+        <property name="batchService" ref="batchService"/>
         <!--<property name="transactionManager" ref="transactionManager"/>-->
     </bean>
 
@@ -44,7 +48,10 @@
         <tx:attributes>
             <!-- 目标方法名为batchImport时，启用声明式事务，成功提交，运行异常时回滚 -->
             <tx:method name="batchImport" propagation="REQUIRED"/>
-            <tx:method name="batch*" propagation="REQUIRED"/>
+
+            <tx:method name="batchImport1" propagation="REQUIRES_NEW"/>
+            <tx:method name="batchImport2" propagation="REQUIRES_NEW"/>
+            <tx:method name="*" propagation="REQUIRED"/>
         </tx:attributes>
     </tx:advice>
 

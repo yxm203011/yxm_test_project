@@ -13,6 +13,8 @@ public class EmployeeService {
 
     private EmployeeDao employeeDao;
 
+    private BatchService batchService;
+
     //private DataSourceTransactionManager transactionManager;
 
     public void batchImport(){
@@ -40,12 +42,29 @@ public class EmployeeService {
         System.out.println("导入成功");
     }
 
+    public void startImportJob(){
+        batchService.batchImport1();
+        if(1 == 1){
+            throw new RuntimeException("意料之外的异常");
+        }
+        batchService.batchImport2();
+        System.out.println("批量导入成功");
+    }
+
     public EmployeeDao getEmployeeDao() {
         return employeeDao;
     }
 
     public void setEmployeeDao(EmployeeDao employeeDao) {
         this.employeeDao = employeeDao;
+    }
+
+    public BatchService getBatchService() {
+        return batchService;
+    }
+
+    public void setBatchService(BatchService batchService) {
+        this.batchService = batchService;
     }
 
     /*public DataSourceTransactionManager getTransactionManager() {

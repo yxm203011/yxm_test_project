@@ -69,4 +69,9 @@ public class JDBCTemplateTest {
         employeeService.batchImport();
     }
 
+    @Test
+    public void testStartImportJob(){
+        employeeService.startImportJob();
+    }
+
 }

@@ -49,3 +49,7 @@ JDK动态代理：
 CGLib动态代理：
   如果目标类没有实现接口，则自动使用CGLib通过继承的方式实现代理
 
+Spring JDBC中事务传播方式
+![img.png](img.png)
+一般使用REQUIRED会将方法放到一个事务里面  如果两个事务需要单独执行 就会有问题就需要用REQUIRES_NEW每次都会创建一个新的事务
+
