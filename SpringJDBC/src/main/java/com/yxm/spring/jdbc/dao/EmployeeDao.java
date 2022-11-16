@@ -3,11 +3,15 @@ package com.yxm.spring.jdbc.dao;
 import com.yxm.spring.jdbc.entity.Employee;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
+import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
 
+@Repository
 public class EmployeeDao {
+    @Resource
     private JdbcTemplate jdbcTemplate;
 
     public Employee findById(Integer eno){

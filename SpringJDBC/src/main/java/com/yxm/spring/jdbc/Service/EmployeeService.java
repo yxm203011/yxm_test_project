@@ -3,19 +3,32 @@ package com.yxm.spring.jdbc.Service;
 import com.yxm.spring.jdbc.dao.EmployeeDao;
 import com.yxm.spring.jdbc.entity.Employee;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
+import javax.annotation.Resource;
 import java.util.Date;
 
+@Service
+@Transactional
 public class EmployeeService {
 
+    @Resource
     private EmployeeDao employeeDao;
 
+    @Resource
     private BatchService batchService;
 
     //private DataSourceTransactionManager transactionManager;
+
+    @Transactional(propagation = Propagation.NOT_SUPPORTED,readOnly = true)
+    public Employee findOne(Integer eno){
+        return employeeDao.findById(eno);
+    }
 
     public void batchImport(){
         //编程式事务
@@ -23,9 +36,9 @@ public class EmployeeService {
         TransactionStatus status = transactionManager.getTransaction(transactionDefinition);
         try{*/
             for (int i = 1; i <= 10; i++) {
-                /*if(i == 3){
+                if(i == 3){
                     throw new RuntimeException("意料之外的异常");
-                }*/
+                }
                 Employee employee = new Employee();
                 employee.setEno(8000+i);
                 employee.setEname("员工"+i);

@@ -2,13 +2,21 @@ package com.yxm.spring.jdbc.Service;
 
 import com.yxm.spring.jdbc.dao.EmployeeDao;
 import com.yxm.spring.jdbc.entity.Employee;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.util.Date;
 
+@Service
+@Transactional(propagation = Propagation.NOT_SUPPORTED,readOnly = true)
 public class BatchService {
 
+    @Resource
     private EmployeeDao employeeDao;
 
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void batchImport1(){
         for (int i = 1; i <= 10; i++) {
             Employee employee = new Employee();
@@ -21,6 +29,7 @@ public class BatchService {
         }
     }
 
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void batchImport2(){
         for (int i = 1; i <= 10; i++) {
             Employee employee = new Employee();

@@ -13,14 +13,14 @@
         http://www.springframework.org/schema/tx
         https://www.springframework.org/schema/tx/spring-tx.xsd
         ">
-    <!-- 数据源设置 -->
-    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+     <!--数据源设置-->
+    <!--<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
         <property name="url" value="jdbc:mysql://localhost:3306/test?useUnicode=true&amp;characterEncoding=utf8&amp;zeroDateTimeBehavior=convertToNull&amp;useSSL=false&amp;serverTimezone=GMT%2B8&amp;allowMultiQueries=true"/>
         <property name="username" value="root"/>
         <property name="password" value="root123"/>
     </bean>
-    <!-- jdbcTemplate提供数据源的增删改查的API -->
+    &lt;!&ndash; jdbcTemplate提供数据源的增删改查的API &ndash;&gt;
     <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
         <property name="dataSource" ref="dataSource"/>
     </bean>
@@ -35,18 +35,18 @@
     <bean id="employeeService" class="com.yxm.spring.jdbc.Service.EmployeeService">
         <property name="employeeDao" ref="employeeDao"/>
         <property name="batchService" ref="batchService"/>
-        <!--<property name="transactionManager" ref="transactionManager"/>-->
+        &lt;!&ndash;<property name="transactionManager" ref="transactionManager"/>&ndash;&gt;
     </bean>
 
-    <!-- 事务管理，用于创建事务 提交/回滚 -->
+    &lt;!&ndash; 事务管理，用于创建事务 提交/回滚 &ndash;&gt;
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
-    <!-- 事务通知配置 决定哪些方法使用事务 声明式事务 -->
+    &lt;!&ndash; 事务通知配置 决定哪些方法使用事务 声明式事务 &ndash;&gt;
     <tx:advice id="txAdvice" transaction-manager="transactionManager">
         <tx:attributes>
-            <!-- 目标方法名为batchImport时，启用声明式事务，成功提交，运行异常时回滚 -->
+            &lt;!&ndash; 目标方法名为batchImport时，启用声明式事务，成功提交，运行异常时回滚 &ndash;&gt;
             <tx:method name="batchImport" propagation="REQUIRED"/>
 
             <tx:method name="batchImport1" propagation="REQUIRES_NEW"/>
@@ -55,9 +55,28 @@
         </tx:attributes>
     </tx:advice>
 
-    <!-- 定义声明式事务的作用范围 -->
+    &lt;!&ndash; 定义声明式事务的作用范围 &ndash;&gt;
     <aop:config>
         <aop:pointcut id="pointcut" expression="execution(* com.yxm..*Service.*(..))"/>
         <aop:advisor advice-ref="txAdvice" pointcut-ref="pointcut"/>
-    </aop:config>
+    </aop:config>-->
+
+    <!-- 基于注解配置事务 -->
+    <context:component-scan base-package="com.yxm"/>
+    <!-- 数据源 -->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/test?useUnicode=true&amp;characterEncoding=utf8&amp;zeroDateTimeBehavior=convertToNull&amp;useSSL=false&amp;serverTimezone=GMT%2B8&amp;allowMultiQueries=true"/>
+        <property name="username" value="root"/>
+        <property name="password" value="root123"/>
+    </bean>
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <!-- 事务管理器 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <!-- 启用注解形式声明事务 -->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
 </beans>
