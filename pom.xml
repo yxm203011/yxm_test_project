@@ -18,6 +18,7 @@
         <module>s10</module>
         <module>s11</module>
         <module>SpringJDBC</module>
+        <module>SpringMVC</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
