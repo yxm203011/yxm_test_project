@@ -12,8 +12,8 @@
 
     <context:component-scan base-package="com.yxm.springmvc"/>
     <!--  启用MVC的注解开发  -->
+    <!--  全局日期配置  -->
     <mvc:annotation-driven conversion-service="convertService">
-        <!--   输出中文乱码问题     -->
         <mvc:message-converters>
             <bean class="org.springframework.http.converter.StringHttpMessageConverter">
                 <property name="supportedMediaTypes">
@@ -33,7 +33,7 @@
     <bean id="convertService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
         <property name="converters">
             <set>
-                <bean class="com.yxm.springmvc.converter.MyDateConverter"></bean>
+                <bean class="com.yxm.springmvc.converter.MyDateConverter"/>
             </set>
         </property>
     </bean>

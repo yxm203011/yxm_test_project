@@ -5,7 +5,7 @@
          version="3.1">
     <servlet>
         <servlet-name>springmvc</servlet-name>
-        <!--        DispatcherServlet是Spring MVC最核心的对家DispatcherServlet用于截Http请求，
+        <!--        DispatcherServlet是Spring MVC最核心的对象DispatcherServlet用于截Http请求，
         并根据请求的URL调用与之对应的Controller方法，来完成Http请求的处理-->
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <!--applicationContext.xm1-->
@@ -15,7 +15,7 @@
         </init-param>
         <!--        在Web应用启动时自动创建Spring IOC容器并初始化DispatcherServlet-->
         <load-on-startup>0</load-on-startup>
-        
+
     </servlet>
     <servlet-mapping>
         <servlet-name>springmvc</servlet-name>
